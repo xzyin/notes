@@ -1,0 +1,16 @@
+# 1. 基础信息
+## 1.1 自定义结构
+```C++
+struct vocab_word {
+  long long cn;
+  int *point;
+  char *word, *code, codelen;
+};
+```
+## 1.2 重要变量
+* expTable
+* read_vocab_file
+* save_vocab_file
+#2 数据预处理
+#3 模型训练
+#4 多线程
