@@ -2,9 +2,20 @@
 &emsp;&emsp;在我们开始介绍一个可加载任意概率的骰子之前，我们首先简单介绍一个简单的算法，模拟一个具有n个边的骰子，并且该算法会作为后面介绍的算法的一个模块。例如，我们可能对投一个6边形的骰子或者是掷一个硬币感兴趣，等等。
 
 &emsp;&emsp;在特殊的情况下，我们可以有一个简单优雅，并且高效的方法来模拟这个骰子的输出。这个算法的思想如下。假设我们生成在区间 $[0,1)$ 之间均匀分布的真随机数。我们将这个区间可视化如下图所示:
-![alias table](https://github.com/xzyin/notes/blob/master/figure/statistic/alias_table_1.PNG?raw=true)
-<font size=3px><center>随机数生成区间</center></font>
-&emsp;&emsp;现在，如果我们想要投一个n个边的骰子，一种简单的方法就是将[0,1)的范围拆分成一个n个均匀的大小区域。
+![Fair Die](https://github.com/xzyin/notes/blob/master/figure/statistic/alias_table_1.PNG?raw=true)
+<font size=3px><center>图 1 随机数生成区间</center></font>
+&emsp;&emsp;现在，如果我们想要投一个n个边的骰子，一种简单的方法就是将[0,1)的范围拆分成一个n个均匀的大小区域，每一个区域的长度为 $\frac{1}{n}$ ,拆分之后的具体结果如下:
+![Fair Die](https://raw.githubusercontent.com/xzyin/notes/master/figure/statistic/alias_table_2.PNG)
+<font size=3px><center>图2 切分后的随机数空间</center></font>
+&emsp;&emsp;在上面的基础上，我们随机地在 $[0,1)$ 区间选择一个实数，这个实数将落在上面划分的四个小区域中的一个。因此，在这种情况下,我们可以通过读取随机数落在哪个区间来得到我们的输出。例如在下图3中,我们随机选取一个数所落在的位置如下:
+那么我们可以说我们的骰子投掷的数值为2(假设我们的索引是从0开始的。)
+
+&emsp;&emsp;很明显的,在上述给出的例子中,我们很容易看出随机生成的数值落在哪一个桶中，但是针对上述情况我们如何进行编码呢?在上述给出的模型中，我们给出的骰子是一个公平的骰子，也就是每个范围的大小是相同的其大小为 $\frac{1}{n}$ 。根据上述例子可知，随机数落在的区间为 $i$ 那么 $\frac {i}{n}$ 的值不会大于生成的随机数的值。因此,需要确定输出的结果位于哪个区间我们只需要找到一个最大的数 $i$ 使得 $\frac{i}{n} \le x$ (其中 $x$ 是取得的随机数的值)，等价于在求最大的i整数使得 $i \le xn$, 可知 $i=\lfloor xn \rfloor$,也就是，我们需要找到一个不大于 $xn$ 的自然数。因此，我们给出下述简单的代码来模拟一个公平的 $n$ 个边的骰子。
+> <strong>Algorthim: Simulating a Fair Die</strong>
+> 1. Generate a uniformaly-random value x in range $[0,1)$
+> 2. Return $\lfloor xn \rfloor$
+
+&emsp;&emsp;在上述
 # 2. 用等概率骰子模拟可加载骰子
 # 3. 模拟一个硬币
 # 4. 模拟一个有偏差硬币
